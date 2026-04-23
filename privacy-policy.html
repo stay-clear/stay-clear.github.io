@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Privacy Policy for StayClear, an iOS habit-tracking app by Marcus Lim.">
+  <title>Privacy Policy &mdash; StayClear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      /* Meditative palette — exact tokens from stopcorn/Theme/Palette.swift */
+      --bg-deep:      #F2EDE2;
+      --bg-surface:   #EAE3D4;
+      --bg-elevated:  #E0D7C4;
+      --bg-input:     #D6CBB6;
+      --rule:         #D0C4AC;
+      --rule-strong:  #A89878;
+
+      --ink:          #1F1A14;
+      --ink-soft:     #4A443A;
+      --ink-faded:    #75695A;
+      --ink-muted:    #9C907E;
+      --ink-on-accent:#FBF5EA;
+
+      --vermillion:       #B0392A; /* accent400 — primary seal */
+      --vermillion-soft:  #C8593E;
+      --vermillion-mist:  #F0B8A6;
+      --vermillion-faint: #FBE8E1;
+
+      --font-display: "Cormorant Garamond", "Cormorant", "Hoefler Text", Garamond, "Times New Roman", serif;
+      --font-body:    "Manrope", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --column: 40rem;
+      --edge:   clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-deep:      #14110D;
+        --bg-surface:   #1C1812;
+        --bg-elevated:  #26211A;
+        --bg-input:     #2E2821;
+        --rule:         #36301F; /* warm near-black border */
+        --rule-strong:  #5B4F3E;
+
+        --ink:          #F2EDE2;
+        --ink-soft:     #D0C4AC;
+        --ink-faded:    #9C907E;
+        --ink-muted:    #75695A;
+        --ink-on-accent:#FBF5EA;
+
+        --vermillion:       #D95A47;
+        --vermillion-soft:  #E08870;
+        --vermillion-mist:  #4A241B;
+        --vermillion-faint: #2C1912;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { background: var(--bg-deep); }
+
+    body {
+      font-family: var(--font-body), sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.72;
+      color: var(--ink-soft);
+      background: var(--bg-deep);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Paper grain — subtle noise overlay fixed to the viewport */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -5vh -5vw;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' seed='7'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.1  0 0 0 0 0.08  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body::before { mix-blend-mode: screen; opacity: 0.08; }
+    }
+
+    /* ── Main column ───────────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: var(--column);
+      margin: 0 auto;
+      padding: clamp(3rem, 9vh, 5.5rem) var(--edge) 5rem;
+    }
+
+    h1 {
+      font-family: var(--font-display), sans-serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: clamp(3rem, 8.5vw, 5rem);
+      line-height: 1.0;
+      letter-spacing: -0.018em;
+      color: var(--ink);
+      margin: 0 0 0.6rem;
+    }
+
+    .updated {
+      font-family: var(--font-mono), monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 0 0 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .updated::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1.5px;
+      width: 2.75rem;
+      height: 3px;
+      background: var(--vermillion);
+    }
+
+    /* Lead paragraph — the preamble, directly after the updated line */
+    .updated + p {
+      font-family: var(--font-display), sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+      line-height: 1.45;
+      color: var(--ink);
+      margin: 0 0 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--font-display), sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.7rem, 3.4vw, 2.1rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 4rem 0 1.1rem;
+      padding-top: 1.15rem;
+      position: relative;
+      scroll-margin-top: 2rem;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1.75rem;
+      height: 2px;
+      background: var(--vermillion);
+    }
+
+    h3 {
+      font-family: var(--font-mono), monospace;
+      font-weight: 500;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--vermillion);
+      margin: 2.25rem 0 0.7rem;
+      scroll-margin-top: 2rem;
+    }
+
+    /* Briefly flash the target of an in-page anchor link */
+    :target { animation: target-flash 1.6s ease-out 1; }
+    @keyframes target-flash {
+      0%   { background-color: var(--vermillion-faint); }
+      100% { background-color: transparent; }
+    }
+    @media (prefers-color-scheme: dark) {
+      :target { animation-name: target-flash-dark; }
+    }
+    @keyframes target-flash-dark {
+      0%   { background-color: var(--vermillion-mist); }
+      100% { background-color: transparent; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :target { animation: none; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      h3 { color: var(--vermillion-soft); }
+    }
+
+    p {
+      margin: 0 0 1.1rem;
+    }
+
+    strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    em {
+      font-family: var(--font-display), sans-serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.06em;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--vermillion);
+      padding-bottom: 1px;
+      transition: background-color 0.18s ease, color 0.18s ease;
+    }
+
+    a:hover {
+      background-color: var(--vermillion-faint);
+      color: var(--vermillion);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      a:hover { background-color: var(--vermillion-mist); color: var(--ink); }
+    }
+
+    /* Bullet lists — hanging em-dash marker in muted ink */
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0 0 1.25rem;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin: 0.55rem 0;
+    }
+
+    ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.85em;
+      width: 0.8rem;
+      height: 1px;
+      background: var(--ink-muted);
+    }
+
+    /* Ordered lists — italic serif numerals in vermillion */
+    ol {
+      list-style: none;
+      counter-reset: ol-item;
+      padding-left: 0;
+      margin: 0 0 1.25rem;
+    }
+
+    ol li {
+      counter-increment: ol-item;
+      position: relative;
+      padding-left: 2.75rem;
+      margin: 0.8rem 0;
+    }
+
+    ol li::before {
+      content: counter(ol-item);
+      position: absolute;
+      left: 0;
+      top: -0.12em;
+      width: 2rem;
+      font-family: var(--font-display), sans-serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.65rem;
+      line-height: 1.55;
+      color: var(--vermillion);
+      text-align: left;
+    }
+
+    /* Inline code — IBM Plex Mono on a soft surface tile */
+    code {
+      font-family: var(--font-mono), monospace;
+      font-size: 0.82em;
+      color: var(--ink);
+      background: var(--bg-surface);
+      padding: 0.1em 0.45em;
+      border-radius: 3px;
+      border: 1px solid var(--rule);
+      word-break: break-word;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      code { background: var(--bg-elevated); }
+    }
+
+    /* ── Colophon ──────────────────────────────────────────────────── */
+    .colophon {
+      position: relative;
+      z-index: 2;
+      max-width: var(--column);
+      margin: 0 auto;
+      padding: 2rem var(--edge) 4rem;
+      font-family: var(--font-mono), monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--rule);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem 2rem;
+    }
+
+    .colophon .ornament {
+      font-family: var(--font-display), sans-serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--vermillion);
+      line-height: 1;
+    }
+
+    ::selection {
+      background: var(--vermillion);
+      color: var(--ink-on-accent);
+    }
+
+    /* ── Motion ────────────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      body { animation: fade-up 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+      .masthead .seal { animation: pulse 5.5s ease-in-out infinite; }
+
+      @keyframes fade-up {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 2px var(--bg-deep), 0 0 14px 2px var(--vermillion-mist); }
+        50%      { box-shadow: 0 0 0 2px var(--bg-deep), 0 0 22px 4px var(--vermillion-mist); }
+      }
+    }
+
+    /* Print — strip grain, ornament, animation for clean print-out */
+    @media print {
+      body::before, .masthead .seal { display: none; }
+      body { background: #fff; color: #000; }
+      a { color: #000; border-bottom-color: #000; }
+      main, .masthead, .colophon { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+<main>
+
+<h1>Privacy Policy</h1>
+<p class="updated">Last Updated: 2026-04-23</p>
+
+<p>SayClear (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects your privacy and is committed to protecting your personal information. This Privacy Policy describes how we collect, use, disclose, store, and safeguard information when you download, access, or use the StayClear iOS mobile application (the &ldquo;App&rdquo;).</p>
+
+<p>By using the App, you agree to the practices described in this Privacy Policy. If you do not agree, you should discontinue use of the App and delete it.</p>
+
+<h2 id="disclaimers">Important Disclaimers</h2>
+
+<p>StayClear is a non-medical, educational, and self-help application designed to assist users with personal habit tracking and motivation related to reducing pornography consumption.</p>
+
+<p>The App is not a healthcare service, medical device, therapy platform, counselling service, or treatment program.</p>
+
+<p>StayClear does not provide medical advice, diagnosis, or treatment.</p>
+
+<p>StayClear does not create, receive, maintain, or transmit Protected Health Information (PHI) under the Health Insurance Portability and Accountability Act (HIPAA), and the App is not a &ldquo;Part 2 Program&rdquo; under 42 CFR Part 2 governing substance use disorder treatment records.</p>
+
+<p>No doctor&ndash;patient, therapist&ndash;client, or healthcare provider relationship is created through the App.</p>
+
+<p>Information entered by users may include personal or sensitive behavioural information. Such information is voluntarily entered by users for personal habit tracking purposes within the App and is stored locally on the user&rsquo;s device and in the user&rsquo;s private Apple iCloud account.</p>
+
+<p>Users seeking professional assistance related to addiction, compulsive behaviour, or mental health concerns should consult a qualified healthcare professional.</p>
+
+<h2 id="self-help-use">Informational and Self-Help Use</h2>
+
+<p>The App is intended to provide informational tools and personal habit-tracking features to support user-directed behaviour change.</p>
+
+<p>StayClear does not monitor user activity outside the App and does not guarantee any specific outcomes related to behavioural change, habit formation, or abstinence.</p>
+
+<p>Users remain solely responsible for their personal decisions, actions, and behaviours. The App should not be relied upon as a substitute for professional medical, psychological, or counselling services.</p>
+
+<h2 id="s1">1. Information We Collect</h2>
+
+<p>StayClear is designed to collect as little data as possible. The App has no sign-up flow, no username, no password, and no developer-operated server. We, the developer, do not receive, store, or process your personal entries ourselves. Personal data either lives on your device or synchronises to <em>your own</em> private Apple iCloud account. This section describes, in detail, what data the App handles and where it lives.</p>
+
+<h3 id="s1-1">1.1 Information You Provide</h3>
+
+<p><strong>Account information.</strong> None. StayClear does not operate a user-account system. You do not create an account, set a password, or sign in. Apple&rsquo;s iCloud and the App Store identify your device for sync and billing respectively, but Apple does not share your Apple ID, email address, legal name, or date of birth with us.</p>
+
+<p><strong>Onboarding answers.</strong> During first-run onboarding, the App asks a short sequence of questions to personalise the experience. Currently these cover:</p>
+<ul>
+  <li>Gender</li>
+  <li>Who you are doing this for (e.g. yourself, your partner, your family, God, your faith, or another answer you enter)</li>
+  <li>How often you currently consume pornography</li>
+  <li>Whether you have ever paid for pornography</li>
+  <li>Difficulty becoming aroused without pornography</li>
+  <li>Whether you use pornography to relieve stress</li>
+  <li>Whether your consumption has trended toward more extreme content</li>
+  <li>Whether you feel comfortable confiding in someone about your use</li>
+  <li>A first name or handle of your choice</li>
+  <li>A short free-text personal motivation statement</li>
+</ul>
+<p>Onboarding answers are written to Apple&rsquo;s iCloud Key-Value Store (the <code>NSUbiquitousKeyValueStore</code> API), which is scoped to your Apple ID and syncs only between your own Apple devices. These answers are not transmitted to us.</p>
+
+<p><strong>Habit tracking and behavioural logs.</strong> Inside the App you may voluntarily enter:</p>
+<ul>
+  <li><strong>Daily check-ins</strong> &mdash; one short mood/status entry per day, recording whether you stayed clear, relapsed, or had a difficult day.</li>
+  <li><strong>Journal entries</strong> &mdash; free-text notes, reflections, triggers, or progress notes.</li>
+  <li><strong>Reason photos</strong> &mdash; up to four optional images you choose from your Photos library or capture with the camera, used to remind yourself why you are quitting.</li>
+</ul>
+<p>These entries are persisted via Apple&rsquo;s SwiftData framework and synchronised through the CloudKit container <code>iCloud.io.unspend.stopcorn</code>, which is a <em>private</em> database. Private-database records live inside your personal iCloud account; neither other users of the App nor the developer can read them.</p>
+
+<p>StayClear does not independently verify the accuracy of anything you enter.</p>
+
+<p><strong>Payment and subscription information.</strong> Subscriptions are sold exclusively through Apple In-App Purchase (StoreKit). Apple handles all billing, receipt validation, tax calculation, and renewals. StayClear never receives or stores your credit-card number, bank details, billing address, or Apple ID. We receive only the entitlement signal (i.e. whether the current user has an active subscription) and transaction metadata that Apple exposes to every app. Apple&rsquo;s handling of payment data is governed by Apple&rsquo;s own privacy policy.</p>
+
+<h3 id="s1-2">1.2 Automatically Collected Information</h3>
+
+<p><strong>Device and technical information.</strong> StayClear does <em>not</em> transmit device identifiers, IP addresses, crash logs, diagnostic data, or any other telemetry to the developer or to any third-party server. The App contains no analytics SDK, no crash-reporter SDK, and no advertising SDK.</p>
+
+<p>Apple may independently collect aggregated, anonymised diagnostic data (for example, crash reports, hang reports, and basic usage metrics) and share it with us through App Store Connect. That collection is controlled by Apple and by your iOS setting at <em>Settings &rarr; Privacy &amp; Security &rarr; Analytics &amp; Improvements &rarr; Share With App Developers</em>. You can disable it at any time. We do not receive personally identifying information through this channel.</p>
+
+<p><strong>Usage and analytics data.</strong> None collected by us. StayClear integrates no analytics platform (Firebase, Mixpanel, Amplitude, or similar), no attribution SDK, and no session-recording tool. Feature usage, session duration, and navigation patterns are not logged by the App to any server.</p>
+
+<p><strong>Logs on your device.</strong> The App writes small operational log lines to Apple&rsquo;s unified logging system (<code>os.Logger</code>) so that issues can be diagnosed on a specific device. These logs remain on the device, are cleared over time by iOS, and are not transmitted to us unless you choose to share a diagnostic report with Apple or email us one.</p>
+
+<h3 id="s1-3">1.3 Permissions Requested</h3>
+
+<p>The App asks for the following permissions, each only when relevant to a feature you invoke:</p>
+<ul>
+  <li><strong>Camera</strong> &mdash; used in two places. First, the Panic intervention screen shows a live front-camera view (&ldquo;look at yourself&rdquo;) designed to ground you in the moment; the video stream is <em>not</em> recorded, photographed, saved, or transmitted anywhere, and the camera stops the moment you leave the screen. Second, if you tap the camera option in the Reasons grid, the photo you capture is saved to your private iCloud as a reason photo (see <a href="#s1-1">&sect;1.1</a>).</li>
+  <li><strong>Photo Library</strong> &mdash; accessed only through Apple&rsquo;s system <code>PhotosPicker</code> component when you explicitly choose an existing image as a reason photo. Apple&rsquo;s picker returns only the single image you pick; the App does not request full library access.</li>
+  <li><strong>Notifications</strong> &mdash; used to schedule a single local reminder for your daily check-in at a time you choose. StayClear does not register for remote push notifications and does not communicate with the Apple Push Notification Service.</li>
+  <li><strong>Screen Time / Family Controls</strong> &mdash; required for the website-blocking feature. On approval, the App uses Apple&rsquo;s <code>ManagedSettings</code> framework to ask iOS itself to block a list of adult websites at the system level. The blocklist is a hardcoded set of domains shipped inside the App. The App does not see, log, or transmit your browsing history; Apple enforces blocking at the OS layer and reports nothing back to us.</li>
+</ul>
+
+<p>StayClear does <em>not</em> request access to your contacts, microphone, precise or coarse geolocation, health data, HomeKit data, calendar, reminders, or any other iOS data class. Permissions can be revoked at any time in <em>Settings &rarr; StayClear</em>.</p>
+
+<h2 id="s2">2. Sensitive Personal Information</h2>
+
+<p>Information voluntarily entered into the App may relate to pornography consumption, personal habits, emotional states, or compulsive behaviour. In some jurisdictions, such information qualifies as sensitive personal data.</p>
+
+<p>StayClear processes such information only to provide the habit-tracking features you request and to generate user-controlled progress metrics. Because sensitive entries are stored in your own private iCloud container and never reach a server we operate, we do not receive, read, analyse, aggregate, or resell them.</p>
+
+<p>Sensitive behavioural information is never:</p>
+<ul>
+  <li>sold or licensed to anyone;</li>
+  <li>used for advertising, marketing, profiling, or lookalike modelling;</li>
+  <li>shared with data brokers;</li>
+  <li>used to train machine-learning models.</li>
+</ul>
+
+<p>You may delete individual entries from within the App, or delete all of them at once using the steps described in <a href="#s16">&sect;16 (Data Deletion)</a>.</p>
+
+<h2 id="s3">3. User Control Over Personal Entries</h2>
+
+<p>Personal logs, photos, and notes entered into the App are created and controlled by you. StayClear does not independently evaluate or interpret user entries as medical or psychological assessments.</p>
+
+<p>You control whether to enter, edit, or delete information. Deletion in-App removes the entry from your device and, via iCloud sync, from your other Apple devices. You may additionally remove all StayClear data from iCloud via <em>Settings &rarr; [your name] &rarr; iCloud &rarr; Manage Account Storage &rarr; StayClear &rarr; Delete Data</em>.</p>
+
+<h2 id="s4">4. How We Use Information</h2>
+
+<p>Because almost all data processed by the App stays on your device or in your own iCloud, our own use of information is limited. Information exposed to us (in aggregated, Apple-mediated form) may be used to:</p>
+<ul>
+  <li>operate, maintain, and improve the App;</li>
+  <li>diagnose crashes and fix bugs (via Apple-mediated, anonymised diagnostics when you have opted in);</li>
+  <li>process subscriptions and grant entitlement (via Apple-mediated StoreKit signals);</li>
+  <li>respond to support requests you send us by email;</li>
+  <li>comply with legal obligations.</li>
+</ul>
+
+<p>Entries stored in your iCloud are processed only by you and by Apple&rsquo;s iCloud platform, for the purpose of making the App work on your devices.</p>
+
+<h2 id="s5">5. Legal Basis for Processing (EEA and UK)</h2>
+
+<p>Where the General Data Protection Regulation (GDPR) or the UK GDPR applies, we process personal data under the following legal bases:</p>
+
+<p><strong>Performance of a contract</strong> &mdash; processing necessary to provide the App and its features to you.</p>
+
+<p><strong>Legitimate interests</strong> &mdash; product improvement and the security of the App.</p>
+
+<p><strong>Consent</strong> &mdash; optional features such as notifications, camera, photo library, or Screen Time, each of which iOS requires you to explicitly approve.</p>
+
+<p><strong>Legal obligations</strong> &mdash; processing required to comply with applicable law.</p>
+
+<h2 id="s6">6. Data Sharing and Disclosure</h2>
+
+<p>StayClear does not sell personal information.</p>
+
+<h3 id="s6-1">6.1 Service Providers</h3>
+
+<p>The only third parties involved in operating the App are Apple Inc. services, specifically:</p>
+<ul>
+  <li><strong>Apple iCloud / CloudKit</strong> &mdash; stores your journal, check-in, and reason-photo records in your own private database.</li>
+  <li><strong>Apple iCloud Key-Value Store</strong> &mdash; stores your onboarding answers.</li>
+  <li><strong>Apple In-App Purchase / StoreKit</strong> &mdash; processes subscription purchases and renewals.</li>
+  <li><strong>Apple App Store</strong> &mdash; distributes the App and delivers updates.</li>
+  <li><strong>Apple&rsquo;s unified logging</strong> &mdash; records on-device operational logs (not transmitted).</li>
+</ul>
+
+<p>Apple&rsquo;s handling of this data is governed by Apple&rsquo;s own privacy policy. We do not use any analytics vendor, crash-reporting vendor, CRM platform, advertising network, or third-party payment processor.</p>
+
+<h3 id="s6-2">6.2 Legal Compliance and Safety</h3>
+
+<p>We may disclose information we hold if required to:</p>
+<ul>
+  <li>comply with law, subpoena, or court order;</li>
+  <li>enforce our terms of use;</li>
+  <li>protect user safety;</li>
+  <li>investigate suspected abuse or unlawful conduct.</li>
+</ul>
+<p>In practice, the data we hold is extremely limited (support emails you send us and, indirectly via Apple, subscription entitlement information). We do not hold your journal entries, check-ins, reason photos, or onboarding answers on any server we operate.</p>
+
+<h2 id="s7">7. Data Security</h2>
+
+<p>Because we do not operate a server, there is no StayClear-controlled data store that could be breached. All personal entries are stored either locally on your device, protected by iOS data protection and your device passcode, or in your private iCloud account, protected by your Apple ID credentials and by Apple&rsquo;s iCloud infrastructure.</p>
+
+<p>We recommend that you:</p>
+<ul>
+  <li>keep iOS up to date;</li>
+  <li>use a strong device passcode or biometric lock;</li>
+  <li>enable two-factor authentication on your Apple ID;</li>
+  <li>consider enabling Apple&rsquo;s Advanced Data Protection for iCloud, which applies end-to-end encryption to most iCloud data, including CloudKit private-database records.</li>
+</ul>
+
+<p>Despite these safeguards, no system can guarantee absolute security. Notify us of any suspected unauthorised access at <a href="mailto:clear@unspend.io">clear@unspend.io</a>.</p>
+
+<h2 id="s8">8. Security Incidents</h2>
+
+<p>Because your data does not transit any server we operate, a security incident affecting your App data would most likely arise at the Apple iCloud layer, in which case Apple would directly notify affected account holders in accordance with its own procedures and applicable law.</p>
+
+<p>In the event of a confirmed incident involving data we do hold (for example, email addresses on our support inbox), we will take reasonable steps to investigate, mitigate potential harm, and provide notice where required by applicable law, via email or a notice on this page.</p>
+
+<h2 id="s9">9. Data Retention</h2>
+
+<p>We retain no personal entries on our own infrastructure because we operate no server-side database for App data. The lifetime of the data is therefore under your control:</p>
+<ul>
+  <li>Entries you delete in the App are removed from your device and, via iCloud sync, from your other Apple devices.</li>
+  <li>Onboarding answers are stored in your iCloud Key-Value Store until you reset them by uninstalling the App and removing its iCloud data, or by signing the App out of iCloud.</li>
+  <li>SwiftData/CloudKit records (journal, daily check-ins, reason photos) can be wiped in bulk via <em>Settings &rarr; [your name] &rarr; iCloud &rarr; Manage Account Storage &rarr; StayClear</em>.</li>
+  <li>Uninstalling the App removes all on-device data.</li>
+</ul>
+
+<p>Apple may separately retain billing, receipt, and App Store records according to its own policies and tax or regulatory obligations. Any support emails you send us are retained for as long as needed to resolve your request and to meet our own legal obligations.</p>
+
+<h2 id="s10">10. Cookies, Tracking Technologies, and Analytics</h2>
+
+<p>StayClear is a native iOS application and does not use browser cookies, web tracking pixels, advertising or attribution SDKs, the Identifier for Advertisers (IDFA), or third-party analytics platforms. The App does not ask for App Tracking Transparency permission because it does not track you across apps or websites.</p>
+
+<p>Identifiers used by Apple for billing, receipt validation, and App Store delivery are governed by Apple&rsquo;s privacy policy.</p>
+
+<h2 id="s11">11. Your Privacy Rights</h2>
+
+<p>Depending on your location and applicable law &mdash; including the GDPR (EEA), the UK GDPR, the California Consumer Privacy Act as amended by the California Privacy Rights Act (CCPA/CPRA), and similar laws &mdash; you may have rights regarding your personal information, including:</p>
+<ul>
+  <li>the right to request access to the personal information we hold about you;</li>
+  <li>the right to request correction of inaccurate or incomplete information;</li>
+  <li>the right to request deletion of your personal information, subject to legal retention obligations;</li>
+  <li>the right to request restriction of certain processing activities;</li>
+  <li>the right to object to certain types of processing, including processing based on legitimate interests;</li>
+  <li>the right to withdraw consent where processing is based on consent;</li>
+  <li>the right to opt out of certain uses of personal information where applicable under law;</li>
+  <li>the right not to be discriminated against for exercising any of the rights above.</li>
+</ul>
+
+<p>Because StayClear holds almost no personal information about you (see <a href="#s1">&sect;1</a>), most rights are exercised directly on your own device and iCloud account:</p>
+<ul>
+  <li><strong>Access / portability:</strong> your data is already in your iCloud. To export, use iOS&rsquo;s built-in iCloud data download at <a href="https://privacy.apple.com" rel="noopener">privacy.apple.com</a>.</li>
+  <li><strong>Deletion:</strong> follow the steps in <a href="#s16">&sect;16</a> to remove all StayClear data.</li>
+  <li><strong>Subscription cancellation:</strong> use <em>Settings &rarr; [your name] &rarr; Subscriptions</em> in iOS.</li>
+</ul>
+
+<p>For formal requests or questions, contact us at <a href="mailto:clear@unspend.io">clear@unspend.io</a>. To protect your privacy and security, we may require reasonable verification of your identity before fulfilling certain requests. We will respond to verified requests within the timeframes required by applicable law, generally within 30 to 45 days.</p>
+
+<h2 id="s12">12. International Data Transfers</h2>
+
+<p>Information synced through Apple iCloud and processed by Apple&rsquo;s App Store may be stored or processed outside your country of residence, including in the United States. Apple applies its own safeguards for international data transfers (including, where required, Standard Contractual Clauses). Our own role in such transfers is minimal because we do not operate cross-border infrastructure.</p>
+
+<h2 id="s13">13. Automated Insights and Algorithmic Processing</h2>
+
+<p>The App may present simple progress visualisations such as streak counts, day-by-day status strips, and achievements unlocked as you meet milestones. These summaries are computed entirely on your device from entries you have made yourself. The App uses no machine learning, no large language models, and no remote algorithmic service. No automated decisions are made that produce legal or similarly significant effects on you.</p>
+
+<h2 id="s14">14. Age Restrictions</h2>
+
+<p>Because the App addresses topics relating to pornography consumption and adult sexual behaviour, StayClear is intended for users <strong>at least 17 years old</strong>. The App is rated 17+ on the Apple App Store.</p>
+
+<p>By downloading or using the App, you represent and warrant that you meet this age requirement. We do not knowingly collect personal information from minors. If we learn that a user has provided false age information, we reserve the right to terminate access and delete any associated information we hold.</p>
+
+<h2 id="s15">15. Third-Party Services</h2>
+
+<p>The App does not embed links to, or content from, third-party services other than Apple&rsquo;s own system services (see <a href="#s6-1">&sect;6.1</a>). If we add any such links in the future &mdash; for example, a help article or a support URL &mdash; this Privacy Policy does not cover those third parties, and you should review their own privacy policies.</p>
+
+<h2 id="s16">16. Data Deletion</h2>
+
+<p>There is no StayClear account to delete because StayClear has no accounts. To remove all data associated with your use of the App:</p>
+<ol>
+  <li>Open the App and delete any individual entries you wish to remove first (journal entries, reason photos).</li>
+  <li>Open <em>Settings &rarr; [your name] &rarr; iCloud &rarr; Manage Account Storage &rarr; StayClear</em> and tap <em>Delete Data from iCloud</em>. This removes synced journal entries, check-ins, and reason photos from all your Apple devices.</li>
+  <li>Still in Settings, disable iCloud for StayClear (under <em>Apps Using iCloud</em>) if you wish to prevent re-sync.</li>
+  <li>Delete the App from your device.</li>
+</ol>
+
+<p>For questions about data deletion, contact <a href="mailto:clear@unspend.io">clear@unspend.io</a>.</p>
+
+<h2 id="s17">17. Changes to This Privacy Policy</h2>
+
+<p>We may update this Privacy Policy from time to time. The &ldquo;Last Updated&rdquo; date at the top of this page reflects the most recent revision. Material changes will additionally be surfaced through App Store release notes for the version in which they take effect. Continued use of the App after updates constitutes acceptance of the revised policy.</p>
+
+<h2 id="s18">18. Contact</h2>
+
+<p>If you have questions about this Privacy Policy or your privacy rights, contact <a href="mailto:clear@unspend.io">clear@unspend.io</a>.</p>
+
+</main>
+
+<footer class="colophon">
+  <span>&copy; 2026 Marcus Lim</span>
+  <span class="ornament" aria-hidden="true">&#10086;</span>
+  <span>A native iOS application</span>
+</footer>
+
+</body>
+</html>
+
