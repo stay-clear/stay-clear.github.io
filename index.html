@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StayClear — Quit that habit.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #F2EDE2;
+    --bg-surface: #EAE3D4;
+    --bg-elevated: #E0D7C4;
+    --border-subtle: #D0C4AC;
+    --border-strong: #A89878;
+    --accent-50: #FBE8E1;
+    --accent-100: #F0B8A6;
+    --accent-200: #E08870;
+    --accent-300: #C8593E;
+    --accent-400: #B0392A;
+    --accent-500: #8E2818;
+    --text-primary: #1F1A14;
+    --text-secondary: #4A443A;
+    --text-tertiary: #75695A;
+    --text-muted: #9C907E;
+    --text-on-accent: #FBF5EA;
+    --success: #5C7A50;
+
+    --display: "Cormorant Garamond", Georgia, serif;
+    --body: "Manrope", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+  }
+
+  /* Page-wide warm ambient — same vocabulary as OnboardingBackground in app */
+  body::before, body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    width: 720px; height: 720px;
+    border-radius: 50%;
+    filter: blur(90px);
+  }
+  body::before {
+    top: -260px; left: -200px;
+    background: radial-gradient(circle, rgba(251,232,225,0.85), rgba(251,232,225,0) 65%);
+  }
+  body::after {
+    top: 280px; right: -240px;
+    background: radial-gradient(circle, rgba(240,184,166,0.40), rgba(240,184,166,0) 65%);
+  }
+
+  main { position: relative; z-index: 1; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 32px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(31,26,20,0.12);
+  }
+  .brand-mark img { width: 100%; height: 100%; display: block; }
+  .brand-name {
+    font-family: var(--display);
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    color: var(--text-primary);
+  }
+  .brand-name em { color: var(--accent-400); font-style: italic; }
+  .nav-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 80px 32px 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-400);
+    margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 18px; height: 1px;
+    background: var(--accent-400);
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(48px, 6.4vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    text-wrap: pretty;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent-400);
+  }
+  .hero-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin-bottom: 36px;
+    text-wrap: pretty;
+  }
+
+  /* App Store button — Apple standard black pill */
+  .cta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .appstore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #000;
+    color: #fff;
+    padding: 14px 22px 14px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+    box-shadow: 0 6px 18px rgba(31,26,20,0.18);
+  }
+  .appstore-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(31,26,20,0.22); }
+  .appstore-btn svg { flex: 0 0 auto; }
+  .appstore-btn .as-meta {
+    display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05;
+  }
+  .appstore-btn .as-pre {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+  }
+  .appstore-btn .as-name {
+    font-family: var(--body);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    flex-wrap: wrap;
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-meta span::before {
+    content: ""; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--border-strong);
+  }
+
+  /* Phone collage */
+  .hero-phones {
+    position: relative;
+    height: 640px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .phone {
+    position: absolute;
+    width: 248px;
+    border-radius: 38px;
+    overflow: hidden;
+    background: var(--bg-deep);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.4) inset,
+      0 0 0 1.5px rgba(31,26,20,0.08),
+      0 24px 60px rgba(31,26,20,0.18),
+      0 6px 12px rgba(31,26,20,0.10);
+  }
+  .phone img { display: block; width: 100%; height: auto; }
+  .phone.center { z-index: 3; transform: translateY(-8px); }
+  .phone.left { z-index: 2; transform: translate(-180px, 40px) rotate(-7deg); }
+  .phone.right { z-index: 2; transform: translate(180px, 28px) rotate(6deg); }
+
+  /* ---------- Section: Pillars ---------- */
+  section.pillars {
+    max-width: 1120px;
+    margin: 80px auto 0;
+    padding: 64px 32px 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .pillar-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 28px;
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+  }
+  .pillar-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-400);
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+  .pillar h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    text-wrap: pretty;
+  }
+  .pillar h3 em { font-style: italic; color: var(--accent-400); }
+  .pillar p {
+    font-size: 15.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  /* ---------- Section: How it works (philosophy) ---------- */
+  section.philosophy {
+    max-width: 1120px;
+    margin: 32px auto 0;
+    padding: 80px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .philosophy-h {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+  }
+  .philosophy-h em { font-style: italic; color: var(--accent-400); }
+  .philosophy-body p {
+    font-size: 17px;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    line-height: 1.62;
+    text-wrap: pretty;
+  }
+  .philosophy-body p:last-child { margin-bottom: 0; }
+
+  /* Quote pull */
+  .pullquote {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 80px 32px 40px;
+    text-align: center;
+  }
+  .pullquote q {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.25;
+    color: var(--text-primary);
+    quotes: "\201C" "\201D";
+    text-wrap: pretty;
+  }
+  .pullquote q::before, .pullquote q::after { color: var(--accent-300); }
+  .pullquote .attrib {
+    margin-top: 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  /* ---------- FAQ ---------- */
+  section.faq {
+    max-width: 880px;
+    margin: 40px auto 0;
+    padding: 64px 32px 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .faq h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .faq h2 em { font-style: italic; color: var(--accent-400); }
+  .faq-sub {
+    color: var(--text-tertiary);
+    font-size: 16px;
+    margin-bottom: 36px;
+  }
+  .faq details {
+    border-top: 1px solid var(--border-subtle);
+    padding: 22px 0;
+  }
+  .faq details:last-of-type { border-bottom: 1px solid var(--border-subtle); }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--accent-400);
+    line-height: 1;
+    flex: 0 0 auto;
+    transition: transform 200ms ease;
+  }
+  .faq details[open] summary::after {
+    content: "−";
+    transform: rotate(0deg);
+  }
+  .faq .faq-body {
+    margin-top: 14px;
+    padding-right: 48px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.62;
+    text-wrap: pretty;
+  }
+  .faq .faq-body p + p { margin-top: 12px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 1120px;
+    margin: 80px auto 0;
+    padding: 48px 32px 56px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .foot-brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .foot-brand .brand-mark { width: 28px; height: 28px; border-radius: 6px; }
+  .foot-brand-text {
+    font-family: var(--display);
+    font-size: 18px;
+  }
+  .foot-brand-text em { color: var(--accent-400); font-style: italic; }
+  .foot-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+  .foot-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .foot-links a {
+    font-family: var(--body);
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+  .foot-links a:hover {
+    color: var(--accent-400);
+    border-bottom-color: var(--accent-400);
+  }
+  .copyright {
+    width: 100%;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding-top: 48px;
+      gap: 24px;
+    }
+    .hero-phones { height: 540px; margin-top: 12px; }
+    .phone { width: 220px; }
+    .phone.left { transform: translate(-150px, 40px) rotate(-7deg); }
+    .phone.right { transform: translate(150px, 28px) rotate(6deg); }
+    .pillar-grid { grid-template-columns: 1fr; gap: 40px; }
+    section.philosophy { grid-template-columns: 1fr; gap: 28px; padding: 56px 32px; }
+  }
+  @media (max-width: 560px) {
+    .hero-phones { height: 460px; }
+    .phone { width: 188px; border-radius: 30px; }
+    .phone.left { transform: translate(-110px, 30px) rotate(-7deg); }
+    .phone.right { transform: translate(110px, 22px) rotate(6deg); }
+    .nav-meta { display: none; }
+    .faq summary { font-size: 19px; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark"><img src="assets/logo.png" alt="StayClear logo" /></div>
+      <div class="brand-name">Stay<em>Clear</em></div>
+    </div>
+    <div class="nav-meta">iPhone · iPad</div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="hero-eyebrow">A quiet companion for quitting</div>
+      <h1 class="hero-title">Quit the habit.<br/>Become <em>yourself</em> again.</h1>
+      <p class="hero-sub">
+        StayClear is a private, no-shame app for stepping away from the habit you wish you didn't have. Daily check-ins, honest journaling, and a panic button for when the urge hits — with you, not at you.
+      </p>
+
+      <div class="cta-row">
+        <a class="appstore-btn" href="#" aria-label="Download StayClear on the App Store">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 12.04c-.03-2.96 2.42-4.39 2.53-4.46-1.38-2.02-3.53-2.3-4.3-2.33-1.83-.18-3.57 1.07-4.5 1.07-.94 0-2.37-1.04-3.9-1.01-2 .03-3.85 1.16-4.88 2.95-2.08 3.6-.53 8.94 1.5 11.86 1 1.43 2.18 3.04 3.72 2.98 1.5-.06 2.06-.97 3.87-.97 1.81 0 2.32.97 3.9.94 1.61-.03 2.63-1.46 3.61-2.9 1.13-1.66 1.6-3.27 1.62-3.36-.04-.02-3.1-1.19-3.13-4.71zM14.07 3.5c.83-1 1.39-2.4 1.24-3.78-1.2.05-2.65.8-3.51 1.8-.77.88-1.44 2.29-1.26 3.66 1.34.1 2.7-.68 3.53-1.68z"/>
+          </svg>
+          <span class="as-meta">
+            <span class="as-pre">Install on the</span>
+            <span class="as-name">App Store</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <span>Private by design</span>
+        <span>Syncs via iCloud</span>
+        <span>Free to try</span>
+      </div>
+    </div>
+
+    <div class="hero-phones" aria-hidden="true">
+      <div class="phone left"><img src="assets/phone3.png" alt="" /></div>
+      <div class="phone center"><img src="assets/phone1.png" alt="" /></div>
+      <div class="phone right"><img src="assets/phone2.png" alt="" /></div>
+    </div>
+  </section>
+
+  <!-- Pillars -->
+  <section class="pillars">
+    <div class="pillar-eyebrow">— What's inside</div>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>A daily <em>check-in</em>, not a streak you fear breaking.</h3>
+        <p>One question, asked honestly. Relapses are logged, not punished — because honesty is what makes the streak mean something.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>The <em>panic</em> button for the moment the urge arrives.</h3>
+        <p>Open the app, see the photo of why you're doing this, take a breath. Built for the 90 seconds when willpower runs out.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>A <em>journal</em> that holds what you can't say out loud.</h3>
+        <p>Plain text, no AI, no audience. Your entries stay in your iCloud account — encrypted, end-to-end, yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy">
+    <h2 class="philosophy-h">Built on the <em>quiet conviction</em> that you don't need another app yelling at you.</h2>
+    <div class="philosophy-body">
+      <p>Most habit apps are loud. Streaks, fire emojis, leaderboards. They turn a private struggle into a performance — and the moment you slip, the performance is over.</p>
+      <p>StayClear is the opposite. The interface is calm. The copy is gentle. There is no social feed. There is no shaming. There is just a small set of tools, used a few minutes a day, that help you become honest with yourself about something hard.</p>
+      <p>It's the app we wished existed when we needed it.</p>
+    </div>
+  </section>
+
+  <!-- Pullquote -->
+  <div class="pullquote">
+    <q>I had started to dread the mornings after. Three months in, I woke up and just felt like myself again.</q>
+    <div class="attrib">— Anonymous · 4 months clean</div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Common <em>questions</em>.</h2>
+
+    <details>
+      <summary>Is StayClear free?</summary>
+      <div class="faq-body">
+        <p>The onboarding, your first daily check-in, and the panic button are free to try. Long-term use of the journal, achievements, and full history is part of a subscription that you can start, pause, or cancel at any time from the App Store.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What data does StayClear collect?</summary>
+      <div class="faq-body">
+        <p>None that leaves your devices. Your check-ins, journal entries, photos, and streak data are stored privately in your own iCloud account so they sync across your iPhone and iPad.</p>
+        <p>We don't run analytics on your content. We don't sell anything. We can't read your journal — it's encrypted by Apple before it leaves your device.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What if I relapse?</summary>
+      <div class="faq-body">
+        <p>You log it. That's the whole answer. The app is built around the assumption that quitting is non-linear — relapses are data, not failure. The Journey view shows you a clear-eyed picture of how the past two weeks actually went, and the streak resets without ceremony.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is this a clinical tool?</summary>
+      <div class="faq-body">
+        <p>No. StayClear is not a substitute for therapy, medical care, or a recovery program. If your habit is causing serious harm to your life or to others, please talk to a professional. The app is designed to sit alongside that work, not replace it.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Which devices does it run on?</summary>
+      <div class="faq-body">
+        <p>iPhone (iOS 17 and later) and iPad. There is no Android version planned at this time — the privacy story we want to tell depends on iCloud's end-to-end encryption.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I delete everything?</summary>
+      <div class="faq-body">
+        <p>Yes, from Settings → Reset. One tap wipes every check-in, journal entry, photo, and streak from your iCloud account, on every device, immediately. We keep no copy.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <div class="foot-brand">
+        <div class="brand-mark"><img src="assets/logo.png" alt="StayClear logo" /></div>
+        <div>
+          <div class="foot-brand-text">Stay<em>Clear</em></div>
+          <div class="foot-tag">Quit that habit.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="https://stay-clear.github.io/privacy-policy.html">Privacy policy</a>
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of use</a>
+      <a href="#">App Store</a>
+    </div>
+    <div class="copyright">
+      <span>© 2026 StayClear · Made with care</span>
+      <span>v1.0 · Apr 2026</span>
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>
